@@ -1,6 +1,6 @@
 <?php
 
-Class Produk {
+class Produk {
 
     //Produk
     public string $kode;
@@ -8,24 +8,36 @@ Class Produk {
     public int $harga;
     public int $stok;
 
-    //Constant 
+    //Constant
     public const PAJAK = 0.11;
 
+    //Method static
+    public static function persenPajak(): float {
+        return self::PAJAK * 100;
+    }
+
+    public static function hitungPajak(int $harga): float {
+        return $harga * self::PAJAK;
+    }
+
+    public static function hitungTotal(int $harga): float {
+        return $harga + self::hitungPajak($harga);
+    }
 }
 
-//object 
+//object
 $produk = new Produk();
 
 //Input
-$produk -> kode = 'P0001';
-$produk -> nama = 'Laptop';
-$produk -> harga = 10000000;
-$produk -> stok = 5;
+$produk->kode  = 'P0001';
+$produk->nama  = 'Laptop';
+$produk->harga = 10000000;
+$produk->stok  = 5;
 
 //Hitung
-$pajak       = Produk::PAJAK * 100;
-$jumlahPajak = $produk->harga * Produk::PAJAK;
-$total       = $produk->harga + $jumlahPajak;
+$pajak       = Produk::persenPajak();
+$jumlahPajak = Produk::hitungPajak($produk->harga);
+$total       = Produk::hitungTotal($produk->harga);
 
 //Output
 echo "Produk: ".$produk->nama;
