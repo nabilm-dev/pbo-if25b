@@ -2,29 +2,28 @@
 
 require('./PropertyConstant.php');
 
-use pbo\Marketplace\Produk;
+use pbo\marketplace\Produk;
 
-//object
-$produk = new Produk('P0001','Laptop',10000000,5);
+// Object
+$produk = new Produk('P0001', 'Laptop', 10000000, 5);
 
-//Hitung
+// Hitung
 $pajak       = Produk::persenPajak();
 $jumlahPajak = Produk::hitungPajak($produk->harga);
 $total       = Produk::hitungTotal($produk->harga);
 
-//Output
-echo "Produk: ".$produk->nama;
+// Output
+echo "Produk: " . $produk->nama;
 echo "<br/>";
 
-echo "harga: ".$produk->harga;
+echo "Harga: Rp." . $produk->harga;
 echo "<br/>";
 
-echo "stok: ".$produk->stok;
+echo "Stok: " . $produk->stok;
 echo "<br/>";
 
 echo "Pajak: " . $pajak . "%<br/>";
+echo "Jumlah Pajak: Rp." . $jumlahPajak . "<br/>";
 echo "<br/>";
 
-echo "Total harga setelah Pajak: Rp.".$total;
-
-?>
+echo "Total harga setelah Pajak: Rp." . $total;
