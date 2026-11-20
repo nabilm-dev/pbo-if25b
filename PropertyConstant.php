@@ -1,36 +1,71 @@
 <?php
 
-namespace pbo\marketplace;
+namespace Pbo\Marketplace;
 
 class Produk {
 
-    // Properti
-    public string $kode;
-    public string $nama;
-    public int $harga;
-    public int $stok;
+    //property
+    private string $kode;
+    private string $nama;
+    private int $harga;
+    private int $stok;
 
-    // Constant
+    //constant
     public const PAJAK = 0.11;
 
-    // Constructor (sudah diaktifkan, tanda // dihapus)
-    public function __construct(string $kode, string $nama, int $harga, int $stok) {
+    public function __construct() {}
+
+    //setter
+    public function setKode($kode) {
         $this->kode = $kode;
-        $this->nama = $nama;
-        $this->harga = $harga;
-        $this->stok = $stok;
+        return $this;
     }
 
-    // Method static
-    public static function persenPajak(): float {
+    public function setNama($nama) {
+        $this->nama = $nama;
+        return $this;
+    }
+
+    public function setHarga($harga) {
+        if($harga <= 0) {
+            echo "Harga tidak boleh 0";
+            exit();
+        }
+        $this->harga = $harga;
+        return $this;
+    }
+
+    public function setStok($stok){
+        if($stok <= 0) {
+            echo "Stok tidak boleh 0";
+            exit();
+        }
+        $this->stok = $stok;
+        return $this;
+    }
+
+    //getter 
+    public function getKode() {
+        return $this->kode;
+    }
+    
+    public function getNama() {
+        return $this->nama;
+    }
+    
+    public function getHarga() {
+        return "Rp.". $this->harga;
+    }
+    
+    public function getStok() {
+        return $this->stok;
+    }
+    
+    public function pajak() {
         return self::PAJAK * 100;
     }
 
-    public static function hitungPajak(int $harga): float {
-        return $harga * self::PAJAK;
-    }
-
-    public static function hitungTotal(int $harga): float {
-        return $harga + self::hitungPajak($harga);
+    public function total() {
+        return $this->harga + ($this->harga * self::PAJAK);
     }
 }
